@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Prescriptions</title>
+    <link rel="stylesheet" href="/css/styles.css"/>
+</head>
+<body>
+<header>
+    <h1>Prescriptions</h1>
+    <nav><a href="/prescriptions/new">New</a> | <a href="/report">Report</a> | <a href="/external-api">External API</a> | <a href="/logout">Logout</a></nav>
+</header>
+<section>
+    <form method="get" action="/prescriptions">
+        From: <input type="date" name="start" th:value="${start}"/> To: <input type="date" name="end" th:value="${end}"/>
+        <button type="submit">Filter</button>
+    </form>
+
+    <table>
+        <thead><tr><th>Date</th><th>Patient</th><th>Age</th><th>Gender</th><th>Actions</th></tr></thead>
+        <tbody>
+        <tr th:each="p : ${prescriptions}">
+            <td th:text="${p.prescriptionDate}"></td>
+            <td th:text="${p.patientName}"></td>
+            <td th:text="${p.patientAge}"></td>
+            <td th:text="${p.patientGender}"></td>
+            <td>
+                <a th:href="@{'/prescriptions/edit/' + ${p.id}}">Edit</a>
+                <form th:action="@{'/prescriptions/delete/' + ${p.id}}" method="post" style="display:inline" onsubmit="return confirm('Delete this prescription?');">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+</body>
+</html>

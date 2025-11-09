@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <title>Create/Edit Prescription</title>
+    <link rel="stylesheet" href="/css/styles.css"/>
+    <script>
+        function validateAndSubmit() {
+            var name = document.getElementById('patientName').value.trim();
+            var age = parseInt(document.getElementById('patientAge').value);
+            var gender = document.getElementById('patientGender').value;
+            if (!name) { alert('Patient name required'); return false; }
+            if (isNaN(age) || age < 0 || age > 150) { alert('Enter valid age (0-150)'); return false; }
+            if (!gender) { alert('Select gender'); return false; }
+            return true;
+        }
+    </script>
+</head>
+<body>
+<header><a href="/prescriptions">Back</a></header>
+<h2 th:text="${prescription.id} == null ? 'New Prescription' : 'Edit Prescription'"></h2>
+<form th:action="@{/prescriptions}" th:object="${prescription}" method="post" onsubmit="return validateAndSubmit();">
+    <input type="hidden" th:if="${prescription.id}" th:field="*{id}"/>
+    <div>
+        <label>Prescription Date: <input type="date" th:field="*{prescriptionDate}" required/></label>
+    </div>
+    <div>
+        <label>Patient Name: <input id="patientName" type="text" th:field="*{patientName}" required/></label>
+    </div>
+    <div>
+        <label>Patient Age: <input id="patientAge" type="number" th:field="*{patientAge}" required/></label>
+    </div>
+    <div>
+        <label>Gender:
+            <select id="patientGender" th:field="*{patientGender}" required>
+                <option value="">--Select--</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+        </label>
+    </div>
+    <div>
+        <label>Diagnosis:<br/><textarea th:field="*{diagnosis}"></textarea></label>
+    </div>
+    <div>
+        <label>Medicines:<br/><textarea th:field="*{medicines}"></textarea></label>
+    </div>
+    <div>
+        <label>Next Visit Date: <input type="date" th:field="*{nextVisitDate}"/></label>
+    </div>
+    <div><button type="submit">Save</button></div>
+</form>
+</body>
+</html>
