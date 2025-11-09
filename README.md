@@ -1,22 +1,46 @@
-# Prescription App (Spring Boot)
+💊 Prescription App  
+🏥 CMED Health LTD — Technical Skills Exam  
 
-This is a complete small web application for prescription generation and management.
-Features:
-- H2 in-memory database for users and prescriptions
-- Spring Security with users stored in H2
-- Create / Edit / Delete prescriptions with server-side and client-side validation
-- REST API: GET /api/v1/prescription returns JSON list
-- Day-wise prescription report
-- External API consumer (RXNAV) shown in UI
-- Swagger/OpenAPI available at /swagger-ui.html
+A simple Spring Boot web application to create, list, edit, and delete medical prescriptions. The app includes 🔐 user authentication (H2 DB for credentials), a REST API, 📊 day-wise report, and optional 📘 Swagger documentation.
 
-Default credentials:
-- username: admin
-- password: password
+---
 
-Build & Run:
-- Requires Java 17+ and Maven
-- `mvn clean package`
-- `mvn spring-boot:run` or run the generated jar
+### ✨ Features
+- 👥 User authentication (Spring Security) using H2 (or SQLite) for credentials  
+- 📝 Create / Read / Update / Delete prescriptions  
+- 📄 Prescription fields:  
+  - 📅 Prescription Date (required, valid date)  
+  - 🧑‍⚕️ Patient Name (required)  
+  - 🔢 Patient Age (required, integer, valid range)  
+  - 🚻 Patient Gender (required)  
+  - 🧬 Diagnosis (optional)  
+  - 💊 Medicines (optional)  
+  - 📆 Next visit date (optional)  
+- ✅ Default list view shows prescriptions for the current month; user can set a date range.  
+- 📈 Day-wise prescription count report  
+- 🌐 REST API: `GET /api/v1/prescription` (returns prescriptions in JSON)  
+- 🖥️ Frontend consumes the REST API and shows tabular data  
+- 💡 Bonus (optional): Swagger, client-side validation, delete confirmation, responsive UI  
 
-H2 Console: http://localhost:8080/h2-console (JDBC URL: jdbc:h2:mem:prescriptionsdb)
+---
+
+### 🧰 Tech Stack
+- ☕ Java 17+  
+- 🚀 Spring Boot 3.x  
+- 🧩 Spring MVC, Spring Data JPA  
+- 🔒 Spring Security  
+- 🗄️ H2 (in-memory) or SQLite  
+- 🎨 Thymeleaf (server-side UI) or optionally React for the frontend  
+- 🧱 Maven (or Gradle)  
+- 📘 Swagger / OpenAPI (optional)  
+
+---
+
+### 👨‍💻 Developer Information
+**Name:** Raju Ahmad  
+**LinkedIn:** [https://www.linkedin.com/in/raju-ahmad-3ba198247/](https://www.linkedin.com/in/raju-ahmad-3ba198247/)  
+**Email:** [razuahmed1066@gmail.com](mailto:razuahmed1066@gmail.com)
+
+---
+
+⭐ *If you found this project useful, don’t forget to star the repo!*
